@@ -90,7 +90,6 @@ int main(int argc, char* argv[]) {
     }
 
     std::string subnet = argv[1];
-    std::string target = argv[1];
     int startPort = std::stoi(argv[2]);
     int endPort = std::stoi(argv[3]);
 
@@ -104,7 +103,7 @@ int main(int argc, char* argv[]) {
     for (int i = 0; i < numThreads; ++i) {
         int threadStartPort = startPort + i * portsPerThread;
         int threadEndPort = (i == numThreads - 1) ? endPort : threadStartPort + portsPerThread - 1;
-        threads.emplace_back(scanPortRange, target, threadStartPort, threadEndPort, std::ref(openVulnerabilities));
+        threads.emplace_back(scanPortRange, subnet, threadStartPort, threadEndPort, std::ref(openVulnerabilities));
     }
 
     for (std::thread& thread : threads) {
