@@ -92,8 +92,7 @@ bool scanFtp(const std::string& target, int port) {
         if (bytesRead > 0) {
             std::string ftpResponse(buffer, bytesRead);
             if (ftpResponse.substr(0, 3) == "220") {
-                // FTP session ready to handle operations
-                // TODO: add ftp session analysis
+                std::cout << "FTP session established on port " << port << " for target " << target << std::endl;
             }
         }
         
