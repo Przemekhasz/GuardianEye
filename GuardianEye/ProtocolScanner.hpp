@@ -4,18 +4,21 @@
 #include <thread>
 #include <map>
 #include <mutex>
+#ifndef PROTOCOL_SCANNER_HPP
+#define PROTOCOL_SCANNER_HPP
 
-struct ProtocolConfiguration {
-    int port;
-    std::string protocolName;
-    std::string scanFunction;
+#include <string>
+
+class ProtocolScanner {
+public:
+    ProtocolScanner() = default;
+    ~ProtocolScanner() = default;
+
+    bool scanHttp(const std::string& target, int port);
+    bool scanFtp(const std::string& target, int port);
+
+private:
 };
 
-extern std::vector<ProtocolConfiguration> customProtocols;
-extern std::mutex resultsMutex;
+#endif // PROTOCOL_SCANNER_HPP
 
-bool scanPort(const std::string& target, int port);
-bool scanCustomProtocol(const std::string& target, const ProtocolConfiguration& protocolConfig);
-void distributedScan(const std::string& target);
-bool scanHttp(const std::string& target, int port);
-bool scanFtp(const std::string& target, int port);
