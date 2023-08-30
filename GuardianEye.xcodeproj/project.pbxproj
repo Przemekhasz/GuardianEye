@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		66A2626B2A9EB17C00A8DCE8 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66A2626A2A9EB17C00A8DCE8 /* main.cpp */; };
+		66A262742A9F5CC100A8DCE8 /* ProtocolScanner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66A262722A9F5CC100A8DCE8 /* ProtocolScanner.cpp */; };
+		66A262772A9F5D7B00A8DCE8 /* VulnerabilityAnalyzer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66A262752A9F5D7B00A8DCE8 /* VulnerabilityAnalyzer.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +27,10 @@
 /* Begin PBXFileReference section */
 		66A262672A9EB17C00A8DCE8 /* GuardianEye */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GuardianEye; sourceTree = BUILT_PRODUCTS_DIR; };
 		66A2626A2A9EB17C00A8DCE8 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		66A262722A9F5CC100A8DCE8 /* ProtocolScanner.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ProtocolScanner.cpp; sourceTree = "<group>"; };
+		66A262732A9F5CC100A8DCE8 /* ProtocolScanner.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ProtocolScanner.hpp; sourceTree = "<group>"; };
+		66A262752A9F5D7B00A8DCE8 /* VulnerabilityAnalyzer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = VulnerabilityAnalyzer.cpp; sourceTree = "<group>"; };
+		66A262762A9F5D7B00A8DCE8 /* VulnerabilityAnalyzer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = VulnerabilityAnalyzer.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +64,10 @@
 			isa = PBXGroup;
 			children = (
 				66A2626A2A9EB17C00A8DCE8 /* main.cpp */,
+				66A262722A9F5CC100A8DCE8 /* ProtocolScanner.cpp */,
+				66A262732A9F5CC100A8DCE8 /* ProtocolScanner.hpp */,
+				66A262752A9F5D7B00A8DCE8 /* VulnerabilityAnalyzer.cpp */,
+				66A262762A9F5D7B00A8DCE8 /* VulnerabilityAnalyzer.hpp */,
 			);
 			path = GuardianEye;
 			sourceTree = "<group>";
@@ -119,6 +129,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				66A262742A9F5CC100A8DCE8 /* ProtocolScanner.cpp in Sources */,
+				66A262772A9F5D7B00A8DCE8 /* VulnerabilityAnalyzer.cpp in Sources */,
 				66A2626B2A9EB17C00A8DCE8 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
