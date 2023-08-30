@@ -27,15 +27,25 @@ GuardianEye Network Scanner is a command-line tool written in C++ for scanning a
 2. Run the executable with appropriate command-line arguments to perform scans.
 
 Example:
-```bash
-./GuardianEye <target> <startPort> <endPort>
-```
 
+```bash
+./GuardianEye <target> [<httpPort>] [<ftpPort>] [<scanInterval>] [<scanDuration>]
+```
 
 ## Getting Started
 
-1. Clone this repository: `git clone https://github.com/yourusername/GuardianEye.git`
-2. Compile the code: `g++ -o GuardianEye main.cpp ProtocolScanner.cpp VulnerabilityAnalyzer.cpp -std=c++11 -lpthread`
+1. Clone this repository:
+
+```bash
+`git clone https://github.com/yourusername/GuardianEye.git`
+```
+
+2. Compile the code:
+
+```bash
+g++ -o GuardianEye main.cpp ProtocolScanner.cpp VulnerabilityAnalyzer.cpp -std=c++11 -lpthread`
+```
+
 3. Run the executable with the desired parameters.
 
 ## TODO

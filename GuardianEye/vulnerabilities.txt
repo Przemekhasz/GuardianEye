@@ -1,2 +1,0 @@
-80 HTTP Remote Code Execution Vulnerability
-22 SSH Weak Password Vulnerability
