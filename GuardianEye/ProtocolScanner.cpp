@@ -5,6 +5,9 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 
+std::vector<ProtocolConfiguration> customProtocols;
+std::mutex resultsMutex;
+
 bool scanPort(const std::string& target, int port, std::string& service) {
     int sock = socket(AF_INET, SOCK_STREAM, 0);
     if (sock == -1) {
