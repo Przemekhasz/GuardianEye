@@ -6,7 +6,7 @@
 #include "VulnerabilityAnalyzer.hpp"
 #include "AutomaticScanScheduler.hpp"
 
-int main(int argc, char* argv[]) {
+void displayLogo() {
     std::string logo = R"(
     _____                         _  _                _____
    |  __ \                       | |(_)              |  ___|
@@ -19,18 +19,36 @@ int main(int argc, char* argv[]) {
     )";
 
     std::cout << logo << std::endl;
+}
 
-    if (argc < 6) {
-        std::cerr << "Usage: " << argv[0] << " <target> <httpPort> <ftpPort> <scanInterval> <scanDuration>" << std::endl;
+int main(int argc, char* argv[]) {
+    if (argc < 2) {
+        std::cerr << "Usage: " << argv[0] << " <target> [<httpPort>] [<ftpPort>] [<scanInterval>] [<scanDuration>]" << std::endl;
         return 1;
     }
 
     std::string target = argv[1];
-    int httpPort = std::stoi(argv[2]);
-    int ftpPort = std::stoi(argv[3]);
-    int scanInterval = std::stoi(argv[4]);
-    int scanDuration = std::stoi(argv[5]);
-    std::vector<int> openPorts;
+    // defaults
+    int httpPort = 80;
+    int ftpPort = 21;
+    int scanInterval = 60;
+    int scanDuration = 300;
+    // end defaults
+
+    if (argc >= 3) {
+        httpPort = std::stoi(argv[2]);
+    }
+    if (argc >= 4) {
+        ftpPort = std::stoi(argv[3]);
+    }
+    if (argc >= 5) {
+        scanInterval = std::stoi(argv[4]);
+    }
+    if (argc >= 6) {
+        scanDuration = std::stoi(argv[5]);
+    }
+    
+    displayLogo();
 
     ProtocolScanner scanner;
     AutomaticScanScheduler scheduler(scanner, target, httpPort, ftpPort, scanInterval, scanDuration);
@@ -38,11 +56,11 @@ int main(int argc, char* argv[]) {
 
     std::this_thread::sleep_for(std::chrono::seconds(scanDuration));
     schedulerThread.join();
-    
+
     VulnerabilityAnalyzer analyzer;
     std::vector<IdentifiedService> identifiedServices;
 
-    for (int port : openPorts) {
+    for (int port : {httpPort, ftpPort}) {
         identifiedServices.push_back(analyzer.identifyService(port));
     }
 
