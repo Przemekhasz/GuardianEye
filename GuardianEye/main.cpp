@@ -101,7 +101,9 @@ bool scanHttp(const std::string& target, int port) {
         ssize_t bytesRead = recv(sock, buffer, sizeof(buffer), 0);
         if (bytesRead > 0) {
             std::string httpResponse(buffer, bytesRead);
-            // TODO: add HTTP response analysis
+            if (httpResponse.find("200 OK") != std::string::npos) {
+                return true;
+            }
         }
         
         close(sock);
@@ -145,10 +147,10 @@ bool scanFtp(const std::string& target, int port) {
 
 void scanApplicationProtocols(const std::string& target, int httpPort, int ftpPort, std::vector<Vulnerability>& openVulnerabilities) {
     if (scanHttp(target, httpPort)) {
-        // TODO: add information to openVulnerabilities
+        openVulnerabilities.push_back({httpPort, "HTTP", "HTTP service is open."});
     }
     if (scanFtp(target, ftpPort)) {
-        // TODO: add information to openVulnerabilities
+        openVulnerabilities.push_back({ftpPort, "FTP", "FTP service is open."});
     }
 }
 
