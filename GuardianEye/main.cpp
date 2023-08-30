@@ -24,6 +24,11 @@ struct Vulnerability {
     std::string vulnerability;
 };
 
+struct IdentifiedService {
+    int port;
+    std::string service;
+};
+
 bool scanPort(const std::string& target, int port, std::string& service) {
     int sock = socket(AF_INET, SOCK_STREAM, 0);
     if (sock == -1) {
@@ -172,6 +177,17 @@ void automaticScanScheduler(const std::string& target, int httpPort, int ftpPort
     }
 }
 
+IdentifiedService identifyService(int port) {
+    // easy solution
+    if (port == 80) {
+        return {port, "HTTP Server"};
+    } else if (port == 21) {
+        return {port, "FTP Server"};
+    }
+    
+    return {port, "Uknown Service"};
+}
+
 int main(int argc, char* argv[]) {
     if (argc < 5) {
         std::cerr << "Usage: " << argv[0] << " <target> <httpPort> <ftpPort> <scanInterval> <scanDuration>" << std::endl;
@@ -184,9 +200,21 @@ int main(int argc, char* argv[]) {
     int scanInterval = std::stoi(argv[4]);
     int scanDuration = std::stoi(argv[5]);
 
+    std::vector<int> openPorts;
+    std::vector<IdentifiedService> identifiedServices;
+    
     std::thread schedulerThread(automaticScanScheduler, target, httpPort, ftpPort, scanInterval, scanDuration);
     std::this_thread::sleep_for(std::chrono::seconds(scanDuration));
     schedulerThread.join();
+    
+    for (int port : openPorts) {
+        identifiedServices.push_back(identifyService(port));
+    }
+    
+    std::cout << "Identified Services:" << std::endl;
+    for (const IdentifiedService& service : identifiedServices) {
+        std::cout << "Port: " << service.port << ": " << service.service << std::endl;
+    }
     
     return 0;
 }
