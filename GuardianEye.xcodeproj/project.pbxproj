@@ -10,6 +10,7 @@
 		66A2626B2A9EB17C00A8DCE8 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66A2626A2A9EB17C00A8DCE8 /* main.cpp */; };
 		66A262742A9F5CC100A8DCE8 /* ProtocolScanner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66A262722A9F5CC100A8DCE8 /* ProtocolScanner.cpp */; };
 		66A262772A9F5D7B00A8DCE8 /* VulnerabilityAnalyzer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66A262752A9F5D7B00A8DCE8 /* VulnerabilityAnalyzer.cpp */; };
+		66A2627E2A9F9D5200A8DCE8 /* AutomaticScanScheduler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66A2627C2A9F9D5200A8DCE8 /* AutomaticScanScheduler.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,6 +32,8 @@
 		66A262732A9F5CC100A8DCE8 /* ProtocolScanner.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ProtocolScanner.hpp; sourceTree = "<group>"; };
 		66A262752A9F5D7B00A8DCE8 /* VulnerabilityAnalyzer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = VulnerabilityAnalyzer.cpp; sourceTree = "<group>"; };
 		66A262762A9F5D7B00A8DCE8 /* VulnerabilityAnalyzer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = VulnerabilityAnalyzer.hpp; sourceTree = "<group>"; };
+		66A2627C2A9F9D5200A8DCE8 /* AutomaticScanScheduler.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AutomaticScanScheduler.cpp; sourceTree = "<group>"; };
+		66A2627D2A9F9D5200A8DCE8 /* AutomaticScanScheduler.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AutomaticScanScheduler.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +71,8 @@
 				66A262732A9F5CC100A8DCE8 /* ProtocolScanner.hpp */,
 				66A262752A9F5D7B00A8DCE8 /* VulnerabilityAnalyzer.cpp */,
 				66A262762A9F5D7B00A8DCE8 /* VulnerabilityAnalyzer.hpp */,
+				66A2627C2A9F9D5200A8DCE8 /* AutomaticScanScheduler.cpp */,
+				66A2627D2A9F9D5200A8DCE8 /* AutomaticScanScheduler.hpp */,
 			);
 			path = GuardianEye;
 			sourceTree = "<group>";
@@ -131,6 +136,7 @@
 			files = (
 				66A262742A9F5CC100A8DCE8 /* ProtocolScanner.cpp in Sources */,
 				66A262772A9F5D7B00A8DCE8 /* VulnerabilityAnalyzer.cpp in Sources */,
+				66A2627E2A9F9D5200A8DCE8 /* AutomaticScanScheduler.cpp in Sources */,
 				66A2626B2A9EB17C00A8DCE8 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
