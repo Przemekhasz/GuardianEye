@@ -154,28 +154,39 @@ void scanApplicationProtocols(const std::string& target, int httpPort, int ftpPo
     }
 }
 
+void automaticScanScheduler(const std::string& target, int httpPort, int ftpPort, int scanInterval, int scanDuration) {
+    while (true) {
+        std::vector<Vulnerability> openVulnerabilities;
+        scanApplicationProtocols(target, httpPort, ftpPort, openVulnerabilities);
+        
+        if (!openVulnerabilities.empty()) {
+            std::cout << "Detected vulnerabilities:" << std::endl;
+            for (const Vulnerability& v : openVulnerabilities) {
+                std::cout<< "Port: " << v.port << " (" << v.service << "): " << v.vulnerability << std::endl;
+            }
+        } else {
+            std::cout << "No known vulnerabilities detected." << std::endl;
+        }
+        
+        std::this_thread::sleep_for(std::chrono::seconds(scanInterval));
+    }
+}
+
 int main(int argc, char* argv[]) {
     if (argc < 5) {
-        std::cerr << "Usage: " << argv[0] << " <target> <httpPort> <ftpPort> <otherPort>" << std::endl;
+        std::cerr << "Usage: " << argv[0] << " <target> <httpPort> <ftpPort> <scanInterval> <scanDuration>" << std::endl;
         return 1;
     }
 
     std::string target = argv[1];
     int httpPort = std::stoi(argv[2]);
     int ftpPort = std::stoi(argv[3]);
-    int otherPort = std::stoi(argv[4]);
+    int scanInterval = std::stoi(argv[4]);
+    int scanDuration = std::stoi(argv[5]);
 
-    std::vector<Vulnerability> openVulnerabilities;
-    scanApplicationProtocols(target, httpPort, ftpPort, openVulnerabilities);
-
-    if (!openVulnerabilities.empty()) {
-        std::cout << "Detected vulnerabilities:" << std::endl;
-        for (const Vulnerability& vuln : openVulnerabilities) {
-            std::cout << "Port " << vuln.port << " (" << vuln.service << "): " << vuln.vulnerability << std::endl;
-        }
-    } else {
-        std::cout << "No known vulnerabilities detected." << std::endl;
-    }
-
+    std::thread schedulerThread(automaticScanScheduler, target, httpPort, ftpPort, scanInterval, scanDuration);
+    std::this_thread::sleep_for(std::chrono::seconds(scanDuration));
+    schedulerThread.join();
+    
     return 0;
 }
