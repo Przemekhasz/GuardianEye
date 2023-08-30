@@ -17,6 +17,8 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include <unistd.h>
+#include <map>
+#include <chrono>
 
 struct Vulnerability {
     int port;
@@ -24,10 +26,13 @@ struct Vulnerability {
     std::string vulnerability;
 };
 
-struct IdentifiedService {
+struct ProtocolConfiguration {
     int port;
-    std::string service;
+    std::string protocolName;
+    std::string scanFunction;
 };
+
+std::vector<ProtocolConfiguration> customProtocols;
 
 bool scanPort(const std::string& target, int port, std::string& service) {
     int sock = socket(AF_INET, SOCK_STREAM, 0);
@@ -177,15 +182,15 @@ void automaticScanScheduler(const std::string& target, int httpPort, int ftpPort
     }
 }
 
-IdentifiedService identifyService(int port) {
-    // easy solution
-    if (port == 80) {
-        return {port, "HTTP Server"};
-    } else if (port == 21) {
-        return {port, "FTP Server"};
-    }
+bool scanCustomProtocol(const std::string& target, const ProtocolConfiguration& protocolConfig) {
+    std::cout << "Scanning port: " << protocolConfig.port << " for " << protocolConfig.protocolName << "..." << std::endl;
     
-    return {port, "Uknown Service"};
+    if (protocolConfig.scanFunction == "scanHttp") {
+        return scanHttp(target, protocolConfig.port);
+    } else if (protocolConfig.scanFunction == "scanFtp") {
+        return scanFtp(target, protocolConfig.port);
+    }
+    return false;
 }
 
 int main(int argc, char* argv[]) {
@@ -201,19 +206,16 @@ int main(int argc, char* argv[]) {
     int scanDuration = std::stoi(argv[5]);
 
     std::vector<int> openPorts;
-    std::vector<IdentifiedService> identifiedServices;
     
     std::thread schedulerThread(automaticScanScheduler, target, httpPort, ftpPort, scanInterval, scanDuration);
     std::this_thread::sleep_for(std::chrono::seconds(scanDuration));
     schedulerThread.join();
+
     
-    for (int port : openPorts) {
-        identifiedServices.push_back(identifyService(port));
-    }
-    
-    std::cout << "Identified Services:" << std::endl;
-    for (const IdentifiedService& service : identifiedServices) {
-        std::cout << "Port: " << service.port << ": " << service.service << std::endl;
+    for (const ProtocolConfiguration& protocolConfig : customProtocols) {
+        if (scanCustomProtocol(target, protocolConfig)) {
+            std::cout << "Port: " << protocolConfig.port << " (" << protocolConfig.protocolName << ") is open." << std::endl;
+        }
     }
     
     return 0;
