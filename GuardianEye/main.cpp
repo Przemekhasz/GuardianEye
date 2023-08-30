@@ -2,9 +2,11 @@
 #include <vector>
 #include <thread>
 #include <chrono>
+// headers
 #include "ProtocolScanner.hpp"
 #include "VulnerabilityAnalyzer.hpp"
 #include "AutomaticScanScheduler.hpp"
+#include "ArgumentSetBuilder.hpp"
 
 void displayLogo() {
     std::string logo = R"(
@@ -27,6 +29,25 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
+    displayLogo();
+    
+    ArgumentSetBuilder builder;
+    
+    // poprzez .addArgument() dokladamy kolejne argumenty jesli chcesz wiedziec jakie parametry po kolei sa wymagane
+    // wejdz do pliku ArgumentSetBuilder.cpp i tam w linii 3 masz wszystkie wymagane argumenty
+    builder                  // te cyferki wez z discorda
+        .addArgument("target", 6, 15, 0, 255) // argument z linii 28
+        .addArgument("httpPort", 2, 5, 1, 65535) // argument z linii 28
+        .addArgumentSet({argv[1], argv[2]}); // ta linia pobiera argumenty rzeczywiste jak masz linie 26 to argumentem jest
+                                            // int argc czyli ilosc podanych argumentow oraz argv[] czyli zbior parametrow np argv["127.0.0.1", "80"]
+                                            // w tym przypadku ilosc int argc jest rowna 2 bo mamy 2 argumenty czyli jezeli chcesz odwolac sie do kolejnego
+                                            // argumentu dopisujesz argv[numer argumentu] od linii 59 do 71 masz wewnatrz ifow numery argv[] dla kazdego parametru
+    // TODO: zadanie ekstra wymagamy argumentu target tylko reszte nie jest wymagana ale jesli w walidatorze zdefiniowalismy jakies dlugosci i zakresy to
+    // mimo ze nie saWymagane to walidator sie przywali boWymagaja jakiejs dlugosci, sprobuj dodac logike ktora sprawdzi czy uzywany jest dany argument
+    // jesli tak to wtedy dopiero waliduj jesli nie jest uzywany to pomijamy walidacje
+    // rozwiazanie jest ponizej zakomentowane wystarczy je odkomentowac dostosowac te powyzej tzn usunac zbedne fragmenty
+    builder.validateArguments();
+    
     std::string target = argv[1];
     // defaults
     int httpPort = 80;
@@ -36,6 +57,7 @@ int main(int argc, char* argv[]) {
     // end defaults
 
     if (argc >= 3) {
+        // builder.addArgument("httpPort", 2, 5, 1, 65535).addArgumentSet({argv[2]});
         httpPort = std::stoi(argv[2]);
     }
     if (argc >= 4) {
@@ -47,8 +69,8 @@ int main(int argc, char* argv[]) {
     if (argc >= 6) {
         scanDuration = std::stoi(argv[5]);
     }
-    
-    displayLogo();
+    // builder.validateArguments();
+
 
     ProtocolScanner scanner;
     AutomaticScanScheduler scheduler(scanner, target, httpPort, ftpPort, scanInterval, scanDuration);

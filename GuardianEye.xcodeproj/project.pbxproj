@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		662DB16D2A9FFBB7000BA7B5 /* CustomValidator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 662DB16B2A9FFBB7000BA7B5 /* CustomValidator.cpp */; };
+		662DB1702A9FFE5F000BA7B5 /* ArgumentSetBuilder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 662DB16E2A9FFE5F000BA7B5 /* ArgumentSetBuilder.cpp */; };
 		66A2626B2A9EB17C00A8DCE8 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66A2626A2A9EB17C00A8DCE8 /* main.cpp */; };
 		66A262742A9F5CC100A8DCE8 /* ProtocolScanner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66A262722A9F5CC100A8DCE8 /* ProtocolScanner.cpp */; };
 		66A262772A9F5D7B00A8DCE8 /* VulnerabilityAnalyzer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66A262752A9F5D7B00A8DCE8 /* VulnerabilityAnalyzer.cpp */; };
@@ -26,6 +28,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		662DB16B2A9FFBB7000BA7B5 /* CustomValidator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CustomValidator.cpp; sourceTree = "<group>"; };
+		662DB16C2A9FFBB7000BA7B5 /* CustomValidator.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CustomValidator.hpp; sourceTree = "<group>"; };
+		662DB16E2A9FFE5F000BA7B5 /* ArgumentSetBuilder.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ArgumentSetBuilder.cpp; sourceTree = "<group>"; };
+		662DB16F2A9FFE5F000BA7B5 /* ArgumentSetBuilder.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ArgumentSetBuilder.hpp; sourceTree = "<group>"; };
 		66A262672A9EB17C00A8DCE8 /* GuardianEye */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GuardianEye; sourceTree = BUILT_PRODUCTS_DIR; };
 		66A2626A2A9EB17C00A8DCE8 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		66A262722A9F5CC100A8DCE8 /* ProtocolScanner.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ProtocolScanner.cpp; sourceTree = "<group>"; };
@@ -73,6 +79,10 @@
 				66A262762A9F5D7B00A8DCE8 /* VulnerabilityAnalyzer.hpp */,
 				66A2627C2A9F9D5200A8DCE8 /* AutomaticScanScheduler.cpp */,
 				66A2627D2A9F9D5200A8DCE8 /* AutomaticScanScheduler.hpp */,
+				662DB16B2A9FFBB7000BA7B5 /* CustomValidator.cpp */,
+				662DB16C2A9FFBB7000BA7B5 /* CustomValidator.hpp */,
+				662DB16E2A9FFE5F000BA7B5 /* ArgumentSetBuilder.cpp */,
+				662DB16F2A9FFE5F000BA7B5 /* ArgumentSetBuilder.hpp */,
 			);
 			path = GuardianEye;
 			sourceTree = "<group>";
@@ -120,6 +130,9 @@
 				Base,
 			);
 			mainGroup = 66A2625E2A9EB17C00A8DCE8;
+			packageReferences = (
+				66A2627F2A9FDAAC00A8DCE8 /* XCRemoteSwiftPackageReference "json" */,
+			);
 			productRefGroup = 66A262682A9EB17C00A8DCE8 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -134,6 +147,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				662DB16D2A9FFBB7000BA7B5 /* CustomValidator.cpp in Sources */,
+				662DB1702A9FFE5F000BA7B5 /* ArgumentSetBuilder.cpp in Sources */,
 				66A262742A9F5CC100A8DCE8 /* ProtocolScanner.cpp in Sources */,
 				66A262772A9F5D7B00A8DCE8 /* VulnerabilityAnalyzer.cpp in Sources */,
 				66A2627E2A9F9D5200A8DCE8 /* AutomaticScanScheduler.cpp in Sources */,
@@ -291,6 +306,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		66A2627F2A9FDAAC00A8DCE8 /* XCRemoteSwiftPackageReference "json" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/nlohmann/json";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = 66A2625F2A9EB17C00A8DCE8 /* Project object */;
 }

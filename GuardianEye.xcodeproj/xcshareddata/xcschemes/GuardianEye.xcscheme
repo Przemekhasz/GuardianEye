@@ -53,23 +53,23 @@
       <CommandLineArguments>
          <CommandLineArgument
             argument = "127.0.0.1"
-            isEnabled = "NO">
+            isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "80"
-            isEnabled = "NO">
+            argument = "1"
+            isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "22"
-            isEnabled = "NO">
+            argument = "21"
+            isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "10"
-            isEnabled = "NO">
+            isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "15"
-            isEnabled = "NO">
+            argument = "10"
+            isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
    </LaunchAction>
