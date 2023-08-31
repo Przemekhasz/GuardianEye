@@ -16,7 +16,7 @@ public:
 
 private:
     std::vector<CustomValidator> validators;
-    std::vector<std::vector<std::string>> argumentSets;
+    std::vector<std::vector<std::string> > argumentSets;
 };
 
 #endif

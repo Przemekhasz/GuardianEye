@@ -2,6 +2,7 @@
 #include <vector>
 #include <thread>
 #include <chrono>
+#include <initializer_list>
 // headers
 #include "ProtocolScanner.hpp"
 #include "VulnerabilityAnalyzer.hpp"
@@ -9,16 +10,15 @@
 #include "ArgumentSetBuilder.hpp"
 
 void displayLogo() {
-    std::string logo = R"(
-    _____                         _  _                _____
-   |  __ \                       | |(_)              |  ___|
-   | |  \/ _   _   __ _  _ __  __| | _   __ _  _ __  | |__  _   _   ___
-   | | __ | | | | / _` || '__|/ _` || | / _` || '_ \ |  __|| | | | / _ \
-   | |_\ \| |_| || (_| || |  | (_| || || (_| || | | || |___| |_| ||  __/
-    \____/ \__,_| \__,_||_|   \__,_||_| \__,_||_| |_|\____/ \__, | \___|
-                                                             __/ |
-                                                            |___/
-    )";
+    std::string logo =
+        "    _____                         _  _                _____\n"
+        "   |  __ \\                       | |(_)              |  ___|\n"
+        "   | |  \\/ _   _   __ _  _ __  __| | _   __ _  _ __  | |__  _   _   ___\n"
+        "   | | __ | | | | / _` || '__|/ _` || | / _` || '_ \\ |  __|| | | | / _ \\\n"
+        "   | |_\\ \\| |_| || (_| || |  | (_| || || (_| || | | || |___| |_| ||  __/\n"
+        "    \\____/ \\__,_| \\__,_||_|   \\__,_||_| \\__,_||_| |_|\\____/ \\__, | \\___|\n"
+        "                                                             __/ |\n"
+        "                                                            |___/\n";
 
     std::cout << logo << std::endl;
 }
@@ -36,17 +36,19 @@ int main(int argc, char* argv[]) {
     // poprzez .addArgument() dokladamy kolejne argumenty jesli chcesz wiedziec jakie parametry po kolei sa wymagane
     // wejdz do pliku ArgumentSetBuilder.cpp i tam w linii 3 masz wszystkie wymagane argumenty
     builder                  // te cyferki wez z discorda
-        .addArgument("target", 6, 15, 0, 255) // argument z linii 28
-        .addArgument("httpPort", 2, 5, 1, 65535) // argument z linii 28
-        .addArgumentSet({argv[1], argv[2]}); // ta linia pobiera argumenty rzeczywiste jak masz linie 26 to argumentem jest
+        //.addArgument("target", 6, 15, 0, 255) // argument z linii 28
+        .addArgument("httpPort", 2, 5, 1, 65535); // argument z linii 28 // ta linia pobiera argumenty rzeczywiste jak masz linie 26 to argumentem jest
                                             // int argc czyli ilosc podanych argumentow oraz argv[] czyli zbior parametrow np argv["127.0.0.1", "80"]
                                             // w tym przypadku ilosc int argc jest rowna 2 bo mamy 2 argumenty czyli jezeli chcesz odwolac sie do kolejnego
-                                            // argumentu dopisujesz argv[numer argumentu] od linii 59 do 71 masz wewnatrz ifow numery argv[] dla kazdego parametru
+                                            // argumentu dopisujesz argv[numer argumentu] od linii 62 do 73 masz wewnatrz ifow numery argv[] dla kazdego parametru
     // TODO: zadanie ekstra wymagamy argumentu target tylko reszte nie jest wymagana ale jesli w walidatorze zdefiniowalismy jakies dlugosci i zakresy to
     // mimo ze nie saWymagane to walidator sie przywali boWymagaja jakiejs dlugosci, sprobuj dodac logike ktora sprawdzi czy uzywany jest dany argument
     // jesli tak to wtedy dopiero waliduj jesli nie jest uzywany to pomijamy walidacje
     // rozwiazanie jest ponizej zakomentowane wystarczy je odkomentowac dostosowac te powyzej tzn usunac zbedne fragmenty
-    builder.validateArguments();
+    
+    std::vector<std::string> arguments;
+    arguments.push_back(argv[1]);
+    arguments.push_back(argv[2]);
     
     std::string target = argv[1];
     // defaults
@@ -57,7 +59,8 @@ int main(int argc, char* argv[]) {
     // end defaults
 
     if (argc >= 3) {
-        // builder.addArgument("httpPort", 2, 5, 1, 65535).addArgumentSet({argv[2]});
+//        builder.addArgument("httpPort", 2, 5, 1, 65535);
+//        arguments.push_back(argv[2]);
         httpPort = std::stoi(argv[2]);
     }
     if (argc >= 4) {
@@ -69,7 +72,9 @@ int main(int argc, char* argv[]) {
     if (argc >= 6) {
         scanDuration = std::stoi(argv[5]);
     }
-    // builder.validateArguments();
+    
+    builder.addArgumentSet(arguments);
+    builder.validateArguments();
 
 
     ProtocolScanner scanner;
@@ -82,7 +87,9 @@ int main(int argc, char* argv[]) {
     VulnerabilityAnalyzer analyzer;
     std::vector<IdentifiedService> identifiedServices;
 
-    for (int port : {httpPort, ftpPort}) {
+    int ports[] = {httpPort, ftpPort};
+
+    for (int port : ports) {
         identifiedServices.push_back(analyzer.identifyService(port));
     }
 

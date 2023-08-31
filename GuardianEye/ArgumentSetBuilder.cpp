@@ -2,7 +2,7 @@
 #include <iostream>
 
 ArgumentSetBuilder& ArgumentSetBuilder::addArgument(const std::string& name, int minLength, int maxLength, int rangeFrom, int rangeTo) {
-    validators.emplace_back(name, minLength, maxLength, rangeFrom, rangeTo);
+    validators.push_back(CustomValidator(name, minLength, maxLength, rangeFrom, rangeTo));
     return *this;
 }
 
