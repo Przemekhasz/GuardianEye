@@ -37,7 +37,6 @@ int main(int argc, char* argv[]) {
     
     std::vector<std::string> arguments;
     arguments.push_back(argv[1]);
-    arguments.push_back(argv[2]);
     
     std::string target = argv[1];
     // defaults
