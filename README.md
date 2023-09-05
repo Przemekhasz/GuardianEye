@@ -37,13 +37,13 @@ Example:
 1. Clone this repository:
 
 ```bash
-`git clone https://github.com/yourusername/GuardianEye.git`
+git clone https://github.com/yourusername/GuardianEye.git
 ```
 
 2. Compile the code:
 
 ```bash
-g++ -o GuardianEye main.cpp ProtocolScanner.cpp VulnerabilityAnalyzer.cpp -std=c++11 -lpthread`
+g++ -o GuardianEye main.cpp ProtocolScanner.cpp VulnerabilityAnalyzer.cpp -std=c++11 -lpthread
 ```
 
 3. Run the executable with the desired parameters.
