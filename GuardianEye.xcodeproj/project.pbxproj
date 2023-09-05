@@ -32,6 +32,7 @@
 		662DB16C2A9FFBB7000BA7B5 /* CustomValidator.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CustomValidator.hpp; sourceTree = "<group>"; };
 		662DB16E2A9FFE5F000BA7B5 /* ArgumentSetBuilder.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ArgumentSetBuilder.cpp; sourceTree = "<group>"; };
 		662DB16F2A9FFE5F000BA7B5 /* ArgumentSetBuilder.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ArgumentSetBuilder.hpp; sourceTree = "<group>"; };
+		662DB1712AA0B800000BA7B5 /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
 		66A262672A9EB17C00A8DCE8 /* GuardianEye */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GuardianEye; sourceTree = BUILT_PRODUCTS_DIR; };
 		66A2626A2A9EB17C00A8DCE8 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		66A262722A9F5CC100A8DCE8 /* ProtocolScanner.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ProtocolScanner.cpp; sourceTree = "<group>"; };
@@ -83,6 +84,7 @@
 				662DB16C2A9FFBB7000BA7B5 /* CustomValidator.hpp */,
 				662DB16E2A9FFE5F000BA7B5 /* ArgumentSetBuilder.cpp */,
 				662DB16F2A9FFE5F000BA7B5 /* ArgumentSetBuilder.hpp */,
+				662DB1712AA0B800000BA7B5 /* CMakeLists.txt */,
 			);
 			path = GuardianEye;
 			sourceTree = "<group>";

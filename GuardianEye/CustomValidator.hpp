@@ -14,7 +14,8 @@ private:
     std::string argName;
     int minLength;
     int maxLength;
-    // tutaj mamy zmienne znajdujace sie w 9 linii brakuje 2 ostatnich
+    int rangeFrom;
+    int rangeTo;
 };
 
 #endif

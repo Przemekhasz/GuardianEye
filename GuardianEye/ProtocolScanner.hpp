@@ -20,5 +20,5 @@ public:
 private:
 };
 
-#endif // PROTOCOL_SCANNER_HPP
+#endif
 
