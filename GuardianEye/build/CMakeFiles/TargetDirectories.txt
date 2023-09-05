@@ -1,0 +1,3 @@
+/Users/przemyslaw.tarapacki/Documents/GitHub/GuardianEye/GuardianEye/build/CMakeFiles/GuardianEye.dir
+/Users/przemyslaw.tarapacki/Documents/GitHub/GuardianEye/GuardianEye/build/CMakeFiles/edit_cache.dir
+/Users/przemyslaw.tarapacki/Documents/GitHub/GuardianEye/GuardianEye/build/CMakeFiles/rebuild_cache.dir

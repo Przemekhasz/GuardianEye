@@ -2,21 +2,22 @@
 #include <vector>
 #include <thread>
 #include <chrono>
+#include <initializer_list>
 #include "ProtocolScanner.hpp"
 #include "VulnerabilityAnalyzer.hpp"
 #include "AutomaticScanScheduler.hpp"
+#include "ArgumentSetBuilder.hpp"
 
 void displayLogo() {
-    std::string logo = R"(
-    _____                         _  _                _____
-   |  __ \                       | |(_)              |  ___|
-   | |  \/ _   _   __ _  _ __  __| | _   __ _  _ __  | |__  _   _   ___
-   | | __ | | | | / _` || '__|/ _` || | / _` || '_ \ |  __|| | | | / _ \
-   | |_\ \| |_| || (_| || |  | (_| || || (_| || | | || |___| |_| ||  __/
-    \____/ \__,_| \__,_||_|   \__,_||_| \__,_||_| |_|\____/ \__, | \___|
-                                                             __/ |
-                                                            |___/
-    )";
+    std::string logo =
+        "    _____                         _  _                _____\n"
+        "   |  __ \\                       | |(_)              |  ___|\n"
+        "   | |  \\/ _   _   __ _  _ __  __| | _   __ _  _ __  | |__  _   _   ___\n"
+        "   | | __ | | | | / _` || '__|/ _` || | / _` || '_ \\ |  __|| | | | / _ \\\n"
+        "   | |_\\ \\| |_| || (_| || |  | (_| || || (_| || | | || |___| |_| ||  __/\n"
+        "    \\____/ \\__,_| \\__,_||_|   \\__,_||_| \\__,_||_| |_|\\____/ \\__, | \\___|\n"
+        "                                                             __/ |\n"
+        "                                                            |___/\n";
 
     std::cout << logo << std::endl;
 }
@@ -27,28 +28,48 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
+    displayLogo();
+    
+    ArgumentSetBuilder builder;
+    
+    builder
+        .addArgument("target", 6, 15, 0, 255);
+    
+    std::vector<std::string> arguments;
+    arguments.push_back(argv[1]);
+    arguments.push_back(argv[2]);
+    
     std::string target = argv[1];
     // defaults
     int httpPort = 80;
     int ftpPort = 21;
     int scanInterval = 60;
     int scanDuration = 300;
-    // end defaults
 
     if (argc >= 3) {
+        builder.addArgument("httpPort", 2, 5, 1, 65535);
+        arguments.push_back(argv[2]);
         httpPort = std::stoi(argv[2]);
     }
     if (argc >= 4) {
+        builder.addArgument("ftpPort", 2, 5, 1, 65535);
+        arguments.push_back(argv[3]);
         ftpPort = std::stoi(argv[3]);
     }
     if (argc >= 5) {
+        builder.addArgument("scanInterval", 1, 5, 1, 3600);
+        arguments.push_back(argv[4]);
         scanInterval = std::stoi(argv[4]);
     }
     if (argc >= 6) {
+        builder.addArgument("scanDuration", 1, 300, 1, 1800);
+        arguments.push_back(argv[5]);
         scanDuration = std::stoi(argv[5]);
     }
     
-    displayLogo();
+    builder.addArgumentSet(arguments);
+    builder.validateArguments();
+
 
     ProtocolScanner scanner;
     AutomaticScanScheduler scheduler(scanner, target, httpPort, ftpPort, scanInterval, scanDuration);
@@ -60,7 +81,9 @@ int main(int argc, char* argv[]) {
     VulnerabilityAnalyzer analyzer;
     std::vector<IdentifiedService> identifiedServices;
 
-    for (int port : {httpPort, ftpPort}) {
+    int ports[] = {httpPort, ftpPort};
+
+    for (int port : ports) {
         identifiedServices.push_back(analyzer.identifyService(port));
     }
 
